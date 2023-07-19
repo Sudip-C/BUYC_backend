@@ -8,7 +8,7 @@ const userRouter = express.Router();
 
 
 userRouter.post("/register", async (req, res) => {
-  const { name, email, gender, pass, age } = req.body;
+  const { name, email, pass,} = req.body;
   try {
     bcrypt.hash(pass, 5, async (err, hash) => {
       if (err) {
@@ -18,8 +18,6 @@ userRouter.post("/register", async (req, res) => {
         const user = await UserModel({
           name,
           email,
-          gender,
-          age,
           pass: hash,
         });
         await user.save();
